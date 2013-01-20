@@ -1,0 +1,29 @@
+body {
+    margin:0;
+    padding:0;
+    line-height:1.5em;
+    height: 100%;
+}
+
+#hud {
+    position:absolute;
+    top:0;
+    width:100%;
+    height:20%;
+    background-color:black;
+    visibility: visible;
+}
+
+.grid {
+    width: auto;
+    height: 20%;
+    margin: 0 auto;
+    background-color: black;
+}
+
+.col {
+    float: left;
+    border-left: 1pt gray solid;
+    padding: 5px;
+    overflow: hidden;
+}
