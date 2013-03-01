@@ -1,0 +1,40 @@
+<head>
+  <title>GTD</title>
+</head>
+
+<body>
+  <div id="top_hud">
+  </div>
+  <div id="main">
+    {{>test}}
+  </div>
+  <div id="bottom_hud">
+
+  </div>
+</body>
+
+<template name="test">
+  <textarea autofocus></textarea>
+</template>
+
+<template name="loginController">
+  {{#unless currentUser}}  
+    <div id="signin">
+      <center><h1>A+</h1></center>
+    </div>
+  {{/unless}}
+</template>
+
+<template name="logoutController">
+  {{#if currentUser}}
+    {{loginButtons}}
+  {{/if}}
+</template>
+
+<template name="next_actions">
+  {{#if loading}}
+    <div>loading...</div>
+  {{else }}
+    <div>cuzzzz</div>
+  {{/if}}
+</template>
