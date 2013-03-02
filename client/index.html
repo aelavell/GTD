@@ -3,19 +3,31 @@
 </head>
 
 <body>
-  <div id="top_hud">
-  </div>
   <div id="main">
-    {{>test}}
+    {{>login}}
+    {{>loggedIn}}
   </div>
   <div id="bottom_hud">
 
   </div>
 </body>
 
-<template name="test">
-  <textarea autofocus></textarea>
+<template name="login">
+  {{#unless currentUser}}
+    {{#if usernameAcquired}}
+      <input type="password" autofocus placeholder="password"></textarea>
+    {{else}}
+      <input type="text" autofocus placeholder="username"></textarea>
+    {{/if}}
+  {{/unless}}
 </template>
+
+<template name="loggedIn">
+  {{#if currentUser}}
+  <button id="logout">logout</button>
+  {{/if}}
+</template>
+
 
 <template name="loginController">
   {{#unless currentUser}}  

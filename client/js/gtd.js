@@ -1,15 +1,38 @@
 // Define Minimongo collections to match server/publish.js.
 lists = new Meteor.Collection("lists");
 
-Template.loginController.loading = function() {
-    return Meteor.user() == null; 
+
+Session.setDefault("username", "");
+Session.setDefault("password", "");
+
+Template.login.usernameAcquired = function() {
+    return Session.get('username');
 }
 
-Template.next_actions.loading = function() {
-    return true;
+Template.login.passwordAcquired = function() {
+    return Session.get('password');
 }
 
-Template.test.events = {
-    'click': function (event) {
+Template.login.events = {
+    'keypress': function (event) {
+        event.currentTarget.rows = 1;
+        if (event.keyCode == 13) {
+            if (!Template.login.usernameAcquired()) {
+                Session.set("username", event.currentTarget.value);
+                event.currentTarget.value = "";
+            }
+            else {
+                Meteor.loginWithPassword(Session.get('username'),
+                    event.currentTarget.value);
+                event.currentTarget.value = "";
+                Session.set('username', '');
+            }
+        }
+    }
+}
+
+Template.loggedIn.events = {
+    'click': function(event) {
+        Meteor.logout();
     }
 }
