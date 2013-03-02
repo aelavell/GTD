@@ -6,11 +6,23 @@
   <div id="main">
     {{>login}}
     {{>loggedIn}}
+    {{>collect}}
   </div>
-  <div id="bottom_hud">
-
-  </div>
+    {{>bottomHud}}
 </body>
+
+<template name="bottomHud">
+  {{#if currentUser}}
+    <div id="bottom_hud">
+      <div class="grid">
+        <div class="col"><h1>Collect</h1></div>
+        <div class="col"><h1>Process</h1></div>
+        <div class="col"><h1>Review<h1></div>
+        <div class="col"><h1>Do</h1></div>
+      </div>
+    </div>
+  {{/if}}
+</template>
 
 <template name="login">
   {{#unless currentUser}}
@@ -24,6 +36,12 @@
 
 <template name="loggedIn">
   {{#if currentUser}}
-  <button id="logout">logout</button>
+    <button id="logout">logout</button>
+  {{/if}}
+</template>
+
+<template name="collect">
+  {{#if currentUser}}
+    <textarea id="collector" autofocus placeholder="your idea"></textarea> 
   {{/if}}
 </template>

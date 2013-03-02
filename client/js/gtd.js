@@ -15,7 +15,6 @@ Template.login.passwordAcquired = function() {
 
 Template.login.events = {
     'keypress': function (event) {
-        event.currentTarget.rows = 1;
         if (event.keyCode == 13) {
             if (!Template.login.usernameAcquired()) {
                 Session.set("username", event.currentTarget.value);
