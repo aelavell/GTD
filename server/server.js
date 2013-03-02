@@ -4,8 +4,7 @@ user = {
 }
 
 Meteor.startup(function() {
-    if (Meteor.users.find().count() == 0) {
-        Accounts.createUser(user);
-    }
+    Meteor.users.remove({});
+    Accounts.createUser(user);
 });
 

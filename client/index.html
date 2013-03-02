@@ -27,26 +27,3 @@
   <button id="logout">logout</button>
   {{/if}}
 </template>
-
-
-<template name="loginController">
-  {{#unless currentUser}}  
-    <div id="signin">
-      <center><h1>A+</h1></center>
-    </div>
-  {{/unless}}
-</template>
-
-<template name="logoutController">
-  {{#if currentUser}}
-    {{loginButtons}}
-  {{/if}}
-</template>
-
-<template name="next_actions">
-  {{#if loading}}
-    <div>loading...</div>
-  {{else }}
-    <div>cuzzzz</div>
-  {{/if}}
-</template>
