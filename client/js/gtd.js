@@ -1,7 +1,3 @@
-// Define Minimongo collections to match server/publish.js.
-lists = new Meteor.Collection("lists");
-
-
 Session.setDefault("username", "");
 Session.setDefault("password", "");
 
@@ -25,6 +21,7 @@ Template.login.events = {
                     event.currentTarget.value);
                 event.currentTarget.value = "";
                 Session.set('username', '');
+                Meteor.flush();
             }
         }
     }
@@ -35,3 +32,6 @@ Template.loggedIn.events = {
         Meteor.logout();
     }
 }
+
+Meteor.startup(function() {
+});

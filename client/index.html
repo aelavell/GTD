@@ -6,7 +6,9 @@
   <div id="main">
     {{>login}}
     {{>loggedIn}}
-    {{>collect}}
+    {{#if currentUser}}
+      {{>modeManager}}
+    {{/if}}
   </div>
     {{>bottomHud}}
 </body>
@@ -15,10 +17,18 @@
   {{#if currentUser}}
     <div id="bottom_hud">
       <div class="grid">
-        <div class="col"><h1>Collect</h1></div>
-        <div class="col"><h1>Process</h1></div>
-        <div class="col"><h1>Review<h1></div>
-        <div class="col"><h1>Do</h1></div>
+        <div class="col" id="collect">
+          <span class="content" id="collect">Collect</span>
+        </div>
+        <div class="col" id="process">
+          <span class="content" id="process">Process</span>
+        </div>
+        <div class="col" id="review">
+          <span class="content" id="review">Review</span>
+        </div>
+        <div class="col" id="do">
+          <span class="content" id="do">Do</span>
+        </div>
       </div>
     </div>
   {{/if}}
@@ -40,8 +50,33 @@
   {{/if}}
 </template>
 
-<template name="collect">
-  {{#if currentUser}}
-    <textarea id="collector" autofocus placeholder="your idea"></textarea> 
+<template name="modeManager">
+  {{#if collectMode}}
+    {{>collect}}
   {{/if}}
+  {{#if processMode}}
+    {{>process}} 
+  {{/if}}
+  {{#if reviewMode}}
+    {{>review}} 
+  {{/if}}
+  {{#if doMode}}
+    {{>do}} 
+  {{/if}}
+</template>
+
+<template name="collect">
+    <textarea id="collector" autofocus placeholder="your idea"></textarea> 
+</template>
+
+<template name="process">
+    process
+</template>
+
+<template name="review">
+    review
+</template>
+
+<template name="do">
+    DO IT
 </template>
