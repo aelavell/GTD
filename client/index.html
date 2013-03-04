@@ -3,19 +3,24 @@
 </head>
 
 <body>
+    {{>topHud}}
   <div id="main">
     {{>login}}
-    {{>loggedIn}}
-    {{#if currentUser}}
-      {{>modeManager}}
-    {{/if}}
+    {{>modeManager}}
   </div>
     {{>bottomHud}}
 </body>
 
+<template name="topHud">
+  <div id="top_hud">
+    {{>loggedIn}}
+    <h1>A+</h1>
+  </div>
+</template>
+
 <template name="bottomHud">
-  {{#if currentUser}}
-    <div id="bottom_hud">
+  <div id="bottom_hud">
+    {{#if currentUser}}
       <div class="grid">
         <div class="col" id="collect">
           <span class="content" id="collect">Collect</span>
@@ -30,8 +35,8 @@
           <span class="content" id="do">Do</span>
         </div>
       </div>
-    </div>
-  {{/if}}
+    {{/if}}
+  </div>
 </template>
 
 <template name="login">
@@ -51,22 +56,24 @@
 </template>
 
 <template name="modeManager">
-  {{#if collectMode}}
-    {{>collect}}
-  {{/if}}
-  {{#if processMode}}
-    {{>process}} 
-  {{/if}}
-  {{#if reviewMode}}
-    {{>review}} 
-  {{/if}}
-  {{#if doMode}}
-    {{>do}} 
+  {{#if currentUser}}
+    {{#if collectMode}}
+      {{>collect}}
+    {{/if}}
+    {{#if processMode}}
+      {{>process}} 
+    {{/if}}
+    {{#if reviewMode}}
+      {{>review}} 
+    {{/if}}
+    {{#if doMode}}
+      {{>doIt}} 
+    {{/if}}
   {{/if}}
 </template>
 
 <template name="collect">
-    <textarea id="collector" autofocus placeholder="your idea"></textarea> 
+    <textarea id="collector" class="middle" autofocus placeholder="your idea"></textarea> 
 </template>
 
 <template name="process">
@@ -77,6 +84,10 @@
     review
 </template>
 
-<template name="do">
-    DO IT
+<template name="doIt">
+  {{#each nextActions}}
+    <div>
+      {{desc}}
+    </div>
+  {{/each}}
 </template>

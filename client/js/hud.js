@@ -1,4 +1,3 @@
-Session.setDefault('mode', 'collect');
 
 Template.modeManager.collectMode = function() {
     return Session.get('mode') === 'collect';

@@ -1,4 +1,4 @@
-Template.collect.events = {
+Template.collect.events({
     'keyup': function (event) {
         if (event.keyCode == 13) {
             
@@ -11,5 +11,5 @@ Template.collect.events = {
             }, 1500);
         }
     }
-}
+});
 

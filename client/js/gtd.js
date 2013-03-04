@@ -34,4 +34,5 @@ Template.loggedIn.events = {
 }
 
 Meteor.startup(function() {
+    Session.set('mode', 'collect');
 });
