@@ -1,4 +1,3 @@
 Template.doIt.nextActions = function() {
-    console.log("yes");
-    return Items.find({});
+    return Items.find({userId: Meteor.userId()});
 };

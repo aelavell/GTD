@@ -1,18 +1,17 @@
-
 Template.modeManager.collectMode = function() {
-    return Session.get('mode') === 'collect';
+    return Session.equals('mode', 'collect');
 }
 
 Template.modeManager.processMode = function() {
-    return Session.get('mode') === 'process';
+    return Session.equals('mode', 'process');
 }
 
 Template.modeManager.reviewMode = function() {
-    return Session.get('mode') === 'review';
+    return Session.equals('mode', 'review');
 }
 
 Template.modeManager.doMode = function() {
-    return Session.get('mode') === 'do';
+    return Session.equals('mode', 'do');
 }
 
 Template.bottomHud.events = {

@@ -1,8 +1,10 @@
 Template.collect.events({
     'keyup': function (event) {
         if (event.keyCode == 13) {
-            
-            Items.insert({desc: event.currentTarget.value.trim()});    
+            Items.insert({
+                userId: Meteor.userId(),
+                desc: event.currentTarget.value.trim(),
+            });    
             event.currentTarget.value = '';
             event.currentTarget.placeholder = 'collected!';
             Meteor.flush();
