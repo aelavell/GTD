@@ -77,17 +77,59 @@
 </template>
 
 <template name="process">
-    process
+  {{#if processingTask}}
+    <div class="container process">
+      <div class="row">
+        <div class="threecol"></div>
+        <div class="sixcol"><center><H2>{{currentValue}}<H2></center></div>
+        <div class="threecol"></div>
+      </div>
+
+      <div class="row">
+        <div class="threecol"><button id="process_tickler" class="process_button">Tickler</button></div>
+        <div class="threecol"><button id="process_reference" class="process_button">Reference</button></div>
+        <div class="threecol"><button id="process_nextAction" class="process_button">Next Action</button></div>
+        <div class="threecol last"><button id="process_calendar" class="process_button">Calendar</button></div>
+      </div>
+
+      <div class="row">
+        <h2>Projects</h2>
+        <div>
+          <input type="text" id="new_project" placeholder="new project" />
+        </div>
+        <ul>
+          {{#each projects}}
+            <li>{{value}}</li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+  {{else}}
+    <div class="process">
+      <ul>
+      {{#each tasks}}
+        <li>{{value}}</li>
+      {{/each}}
+      </ul>
+    </div>
+  {{/if}}
 </template>
 
 <template name="review">
-    review
+  <div class="review">
+    <ul>
+      <li><button id="review_projects">Projects</button></li>
+      <li><button id="review_tickler">Tickler</button></li>
+      <li><button id="review_reference">Reference</button></li>
+      <li><button id="review_calendar">Calendar</button></li>
+    </ul>
+  </div>
 </template>
 
 <template name="doIt">
   {{#each nextActions}}
     <div>
-      {{desc}}
+      {{value}}
     </div>
   {{/each}}
 </template>
