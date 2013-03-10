@@ -1,1 +1,2 @@
-var Items = new Meteor.Collection("items");
+var Tasks = new Meteor.Collection("tasks");
+var Projects = new Meteor.Collection("projects");

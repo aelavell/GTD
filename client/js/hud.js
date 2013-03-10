@@ -16,6 +16,7 @@ Template.modeManager.doMode = function() {
 
 Template.bottomHud.events = {
     'click' : function(event) {
+        Session.set("processing", "");   
         Session.set('mode', event.currentTarget.id);
     }
 };
