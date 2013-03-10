@@ -14,7 +14,7 @@
 <template name="topHud">
   <div id="top_hud">
     {{>loggedIn}}
-    <h1>A+</h1>
+    <div id="logo"><h1>A+</h1></div>
     {{#unless currentUser}}
       {{{loginButton}}}
     {{/unless}}
