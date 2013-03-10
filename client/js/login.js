@@ -10,6 +10,18 @@ Template.login.loginLabel = function() {
     return Session.get("loginOrReg");
 };
 
+Template.login.usernameTextBox = function() {
+    if(Session.equals("loginOrReg", "Login: ")) {
+        return "<input type=text class=loginText autofocus placeholder=username></textarea>";
+    } else {
+        return "<input type=text class=loginText autofocus placeholder='desired username'></textarea>";
+    }
+}
+
+Template.login.passwordTextBox = function() {
+    return "<input type=password class=loginText autofocus placeholder=password></textarea>";
+}
+
 Template.topHud.loginButton = function() {
     if(Session.equals("loginOrReg", "Login: ")) {
         return "<input type=button class=registerToggle value=Register />";

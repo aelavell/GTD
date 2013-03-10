@@ -45,9 +45,9 @@
 <template name="login">
   {{#unless currentUser}}
     {{#if usernameAcquired}}
-      <input type="password" class="loginText" autofocus placeholder="password"></textarea>
+      {{{passwordTextBox}}}
     {{else}}
-      <input type="text" class="loginText" autofocus placeholder="username"></textarea>
+      {{{usernameTextBox}}}
     {{/if}}
   {{/unless}}
 </template>
