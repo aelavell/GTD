@@ -41,11 +41,13 @@
 
 <template name="login">
   {{#unless currentUser}}
+    {{loginLabel}}
     {{#if usernameAcquired}}
       <input type="password" autofocus placeholder="password"></textarea>
     {{else}}
       <input type="text" autofocus placeholder="username"></textarea>
     {{/if}}
+      Toggle: <input type="button" class="registerToggle" value="Login/Register"/>
   {{/unless}}
 </template>
 
