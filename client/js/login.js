@@ -55,6 +55,7 @@ Template.login.events = {
 
 Template.topHud.events = {
     'click .registerToggle': function (event) {
+        document.getElementById('loginText').focus();
         if (Session.get("loginOrReg") === "Login: ") {
             Session.set("loginOrReg", "Register: ");
             document.topHud.registerToggle.value = "Login";
