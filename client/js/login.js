@@ -54,8 +54,7 @@ Template.login.events = {
 };
 
 Template.topHud.events = {
-    'click .registerToggle': function (event) {
-        document.getElementById('loginText').focus();
+    'click .registerToggle': function (event) {        
         if (Session.get("loginOrReg") === "Login: ") {
             Session.set("loginOrReg", "Register: ");
             document.topHud.registerToggle.value = "Login";
@@ -63,6 +62,7 @@ Template.topHud.events = {
             Session.set("loginOrReg", "Login: ");
             document.topHud.registerToggle.value = "Register";
         }
+        document.getElementById('loginText').focus();
     }
 };
 

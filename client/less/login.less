@@ -1,7 +1,8 @@
 @import "mixins.less";
 
 .max {
-    width: 99%;
+	position: absolute;
+    width: 100%;
     height: 100%;
     font-size: 5em;
     text-align: center;
@@ -22,7 +23,10 @@ input {
 }
 
 .loginText {
-	.max;
+    position: absolute;
+    overflow: hidden;
+    z-index: -1;
+    .max
 }
 
 .registerToggle {
