@@ -10,6 +10,14 @@ Template.login.loginLabel = function() {
     return Session.get("loginOrReg");
 };
 
+Template.topHud.loginButton = function() {
+    if(Session.equals("loginOrReg", "Login: ")) {
+        return "<input type=button class=registerToggle value=Register />";
+    } else {
+        return "<input type=button class=registerToggle value=Login />";       
+    }
+}
+
 Template.login.events = {
     'keypress': function (event) {
         if (event.keyCode == 13) {
@@ -30,12 +38,17 @@ Template.login.events = {
                 Meteor.flush();
             }
         }
-    },
+    }
+};
+
+Template.topHud.events = {
     'click .registerToggle': function (event) {
         if (Session.get("loginOrReg") === "Login: ") {
             Session.set("loginOrReg", "Register: ");
+            document.topHud.registerToggle.value = "Login";
         } else {
             Session.set("loginOrReg", "Login: ");
+            document.topHud.registerToggle.value = "Register";
         }
     }
 };
