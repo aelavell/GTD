@@ -3,14 +3,12 @@
 </head>
 
 <body>
-  <div class="container">
-      {{>topHud}}
-    <div id="main">
-      {{>login}}
-      {{>modeManager}}
-    </div>
-      {{>bottomHud}}
+    {{>topHud}}
+  <div id="main">
+    {{>login}}
+    {{>modeManager}}
   </div>
+    {{>bottomHud}}
 </body>
 
 <template name="topHud">
@@ -44,18 +42,22 @@
 <template name="login">
   {{#unless currentUser}}
     <div class="row" id="login">
-      <div class="onecol">
-        {{loginLabel}}
+      <div class="fourcol">
+        <div class="leftColumn">
+          {{loginLabel}}
+        </div>
       </div>
-      <div class="twocol">
+      <div class="fourcol">
         {{#if usernameAcquired}}
-          <input type="password" autofocus placeholder="password"></textarea>
+          <input type="password" class="middleColumn" autofocus placeholder="password"></textarea>
         {{else}}
-          <input type="text" autofocus placeholder="username"></textarea>
+          <input type="text" class="middleColumn" autofocus placeholder="username"></textarea>
         {{/if}}
       </div>
-      <div class="threecol">
-        Toggle: <input type="button" class="registerToggle" value="Login/Register"/>
+      <div class="fourcol last">
+        <div class="rightColumn">
+          Toggle: <input type="button" class="registerToggle" value="Login/Register"/>
+        </div>
       </div>
     </div>
   {{/unless}}
