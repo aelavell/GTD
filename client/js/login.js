@@ -1,5 +1,24 @@
+//I didn't bother commenting this
+//if anyone finds it confusing let me know and I'll go through and comment it
+//-Brad
 Template.login.usernameAcquired = function() {
     return Session.get('username');
+};
+
+Template.login.usernameRequired = function() {
+    if( !Session.get('username') ) {
+        return true;
+    } else {
+        return false;
+    }
+};
+
+Template.login.emailRequired = function() {
+    if(Session.equals("loginOrReg", "Register: ") && !Session.get('email') ) {
+        return true;
+    } else {
+        return false;
+    }
 };
 
 Template.login.passwordAcquired = function() {
@@ -16,11 +35,19 @@ Template.login.usernameTextBox = function() {
     } else {
         return "<input type=text class=loginText autofocus placeholder='desired username'></textarea>";
     }
-}
+};
+
+Template.login.emailTextBox = function() {
+    if(Session.equals("loginOrReg", "Login: ")) {
+        return "<input type=text class=loginText autofocus placeholder='This should only appear during registration'></textarea>";
+    } else {
+        return "<input type=text class=loginText autofocus placeholder='email address'></textarea>";
+    }
+};
 
 Template.login.passwordTextBox = function() {
     return "<input type=password class=loginText autofocus placeholder=password></textarea>";
-}
+};
 
 Template.topHud.loginButton = function() {
     if(Session.equals("loginOrReg", "Login: ")) {
@@ -28,7 +55,7 @@ Template.topHud.loginButton = function() {
     } else {
         return "<input type=button class=registerToggle value=Login />";       
     }
-}
+};
 
 Template.login.events = {
     'keypress': function (event) {
@@ -36,14 +63,23 @@ Template.login.events = {
             if (!Template.login.usernameAcquired()) {
                 Session.set("username", event.currentTarget.value);
                 event.currentTarget.value = "";
+            } else if(Session.equals("loginOrReg", "Register: ") && Template.login.emailRequired()) {
+                Session.set("email", event.currentTarget.value);
+                event.currentTarget.value = "";                
             }
             else {
                 if(Session.equals("loginOrReg", "Login: ")) {                    
                     Meteor.loginWithPassword(Session.get('username'), event.currentTarget.value);
+                    Session.set("username",null);
+                    Session.set("email",null);
+                    Session.set("password",null);
                 } 
                 else if (Session.equals("loginOrReg", "Register: ")) {
-                    Accounts.createUser({username: Session.get("username"), password: event.currentTarget.value});
-                    session.set("loginOrReg", "Login: ");
+                    Accounts.createUser({username: Session.get("username"), email: Session.get('email'), password: event.currentTarget.value});
+                    Session.set("loginOrReg", "Login: ");
+                    Session.set("username",null);
+                    Session.set("email",null);
+                    Session.set("password",null);
                 }
                 event.currentTarget.value = "";
                 Session.set('username', '');
@@ -57,12 +93,12 @@ Template.topHud.events = {
     'click .registerToggle': function (event) {        
         if (Session.get("loginOrReg") === "Login: ") {
             Session.set("loginOrReg", "Register: ");
-            document.topHud.registerToggle.value = "Login";
         } else {
             Session.set("loginOrReg", "Login: ");
-            document.topHud.registerToggle.value = "Register";
         }
-        document.getElementById('loginText').focus();
+        if( document.getElementById('loginText') != null) {
+            document.getElementById('loginText').focus();
+        }
     }
 };
 

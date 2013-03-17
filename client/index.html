@@ -45,7 +45,11 @@
 <template name="login">
   {{#unless currentUser}}
     {{#if usernameAcquired}}
-      {{{passwordTextBox}}}
+      {{#if emailRequired}}
+        {{{emailTextBox}}}
+      {{else}}
+        {{{passwordTextBox}}}
+      {{/if}}
     {{else}}
       {{{usernameTextBox}}}
     {{/if}}
