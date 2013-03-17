@@ -85,37 +85,30 @@
 
 <template name="process">
   {{#if processingTask}}
-    <div class="container process">
-      <div class="row">
-        <div class="threecol"></div>
-        <div class="sixcol"><center><H2>{{currentValue}}<H2></center></div>
-        <div class="threecol"></div>
+    <div class="process">
+      <div class="tickler_ref_next_cal">
+        <button id="process_tickler" class="process_button">Tickler</button>
+        <button id="process_reference" class="process_button">Reference</button>
+        <button id="process_nextAction" class="process_button">Next Action</button>
+        <button id="process_calendar" class="process_button">Calendar</button>
       </div>
-
-      <div class="row">
-        <div class="threecol"><button id="process_tickler" class="process_button">Tickler</button></div>
-        <div class="threecol"><button id="process_reference" class="process_button">Reference</button></div>
-        <div class="threecol"><button id="process_nextAction" class="process_button">Next Action</button></div>
-        <div class="threecol last"><button id="process_calendar" class="process_button">Calendar</button></div>
+      <div class="text_in_processing">
+        <h1>{{currentValue}}</h1>
       </div>
-
-      <div class="row">
-        <h2>Projects</h2>
-        <div>
-          <input type="text" id="new_project" placeholder="new project" />
-        </div>
-        <ul class="scroll_list">
-          {{#each projects}}
-            <li><button> {{value}}</button></li>
-          {{/each}}
-        </ul>
+      <ul class="scroll_list project_list">
+        {{#each projects}}
+          <li><button class="project_button">{{value}}</button></li>
+        {{/each}}
+      </ul>
+      <div>
+        <input type="text" id="new_project" placeholder="new project" />
       </div>
     </div>
   {{else}}
     <div class="process">
-      <ul class="scroll_list">
+      <ul class="scroll_list max_height">
       {{#each unprocessedTasks}}
-      <li class="unprocessed_task"><button>{{value}}</button></li>
+        <li class="unprocessed_task"><button>{{value}}</button></li>
       {{/each}}
       </ul>
     </div>
@@ -134,7 +127,7 @@
 </template>
 
 <template name="doIt">
-  <ul class="scroll_list">
+  <ul class="scroll_list max_height">
   {{#each nextActions}}
     <li >
       <button>{{value}}</button>

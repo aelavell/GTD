@@ -18,16 +18,21 @@ Template.process.events({
     'click ': function(event) {
         // var x = event.currentTarget.id; 
         Session.set("processing", this._id);
+        if (event.currentTarget.className === "project_button") {
+            $(event.currentTarget).addClass("selected_button");
+        }
     },
     'keyup': function (event) {
         // insert new project
         if (event.keyCode == 13) {
-            Projects.insert({
-                userId: Meteor.userId(),
-                value: event.currentTarget.value.trim(),
-            });    
-            event.currentTarget.value = '';
-            Meteor.flush();
+            if (event.currentTarget.value.trim() !== '') {
+                Projects.insert({
+                    userId: Meteor.userId(),
+                    value: event.currentTarget.value.trim(),
+                });    
+                event.currentTarget.value = '';
+                Meteor.flush();
+            }
         }
     }
 });
