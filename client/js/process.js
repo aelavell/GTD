@@ -1,4 +1,4 @@
-Template.process.tasks = function() {
+Template.process.unprocessedTasks = function() {
     return Tasks.find({processed: false});
 };
 
@@ -15,13 +15,12 @@ Template.process.currentValue = function() {
 }
 
 Template.process.events({
-    'mousedown ': function(evt) {
+    'click ': function(event) {
+        // var x = event.currentTarget.id; 
         Session.set("processing", this._id);
-    }
-});
-
-Template.process.events({
+    },
     'keyup': function (event) {
+        // insert new project
         if (event.keyCode == 13) {
             Projects.insert({
                 userId: Meteor.userId(),

@@ -26,16 +26,16 @@
     {{#if currentUser}}
       <div class="grid">
         <div class="col" id="collect">
-          <span class="content" id="collect">Collect</span>
+          <button class="hud_button" id="collect">Collect</button>
         </div>
         <div class="col" id="process">
-          <span class="content" id="process">Process</span>
+          <button class="hud_button" id="process">Process</button>
         </div>
         <div class="col" id="review">
-          <span class="content" id="review">Review</span>
+          <button class="hud_button" id="review">Review</button>
         </div>
         <div class="col" id="do">
-          <span class="content" id="do">Do</span>
+          <button class="hud_button" id="do">Do</button>
         </div>
       </div>
     {{/if}}
@@ -104,18 +104,18 @@
         <div>
           <input type="text" id="new_project" placeholder="new project" />
         </div>
-        <ul>
+        <ul class="scroll_list">
           {{#each projects}}
-            <li>{{value}}</li>
+            <li><button> {{value}}</button></li>
           {{/each}}
         </ul>
       </div>
     </div>
   {{else}}
     <div class="process">
-      <ul>
-      {{#each tasks}}
-        <li>{{value}}</li>
+      <ul class="scroll_list">
+      {{#each unprocessedTasks}}
+      <li class="unprocessed_task"><button>{{value}}</button></li>
       {{/each}}
       </ul>
     </div>
@@ -134,9 +134,11 @@
 </template>
 
 <template name="doIt">
+  <ul class="scroll_list">
   {{#each nextActions}}
-    <div>
-      {{value}}
-    </div>
+    <li >
+      <button>{{value}}</button>
+    </li>
   {{/each}}
+  </ul>
 </template>
