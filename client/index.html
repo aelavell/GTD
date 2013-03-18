@@ -59,9 +59,14 @@
 <template name="loggedIn">
   {{#if currentUser}}
     <button id="logout">logout</button>
-    {{#if doMode}}
-      {{{doModeButton}}}
-    {{/if}}
+    <div id="doButtonContainer">
+      {{#if doMode}}
+        {{{doModeButton}}}
+        {{#if doModeTaskMode}}
+          <button id="doSomethingElseButton" type="button">Give me something else to do!</button>
+        {{/if}}
+      {{/if}}
+    </div>
   {{/if}}
 </template>
 

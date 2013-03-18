@@ -42,6 +42,10 @@ Template.loggedIn.doModeButton = function() {
     }
 }
 
+Template.loggedIn.doModeTaskMode = function() {
+    return Session.equals('doModeMode', 'task');
+}
+
 Template.loggedIn.doMode = function() {
 	return Session.equals('mode', 'do');
 }
@@ -66,6 +70,11 @@ Template.topHud.events = {
         } else {
             Session.set('doModeMode', 'list');
         }   
+    },
+    'click #doSomethingElseButton': function (event) {
+        var taskCount=Tasks.find({userId: Meteor.userId()}).count(); 
+        var randomNumber=Math.floor(Math.random()*taskCount);
+        Session.set("doSelectedTaskNum", randomNumber);        
     }
 };
 
