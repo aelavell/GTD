@@ -52,12 +52,12 @@ Template.topHud.events = {
     'click #doButton': function (event) {   
     	if( Session.equals('doModeMode', 'list') ){
     		Session.set('doModeMode', 'task');
-    	} else {
-    		Session.set('doModeMode', 'list');
-    	}	
-    	var taskCount=Tasks.find({userId: Meteor.userId()}).count(); 
-    	var randomNumber=Math.floor(Math.random()*taskCount);
-    	Session.set("doSelectedTask", Tasks.find({userId: Meteor.userId()}, {skip: randomNumber, limit: 1}));
+        	var taskCount=Tasks.find({userId: Meteor.userId()}).count(); 
+        	var randomNumber=Math.floor(Math.random()*taskCount);
+        	Session.set("doSelectedTaskNum", randomNumber);
+        } else {
+            Session.set('doModeMode', 'list');
+        }   
     }
 };
 

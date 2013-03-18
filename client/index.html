@@ -81,7 +81,7 @@
         {{>doItList}}
       {{/if}}
       {{#if popDoMode}}
-        
+        {{>doItItem}}        
       {{/if}} 
     {{/if}}
   {{/if}}
@@ -142,4 +142,8 @@
     </li>
   {{/each}}
   </ul>
+</template>
+
+<template name="doItItem">
+  <textarea id ="doItItemTextArea" readonly>{{doItItem}}</textarea>
 </template>
