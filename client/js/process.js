@@ -1,9 +1,9 @@
 Template.process.unprocessedTasks = function() {
-    return Tasks.find({processed: false});
+    return Tasks.find({userId: Meteor.userId(), processed: false});
 };
 
 Template.process.projects = function() {
-    return Projects.find({});
+    return Projects.find({userId: Meteor.userId()});
 };
 
 Template.process.processingTask = function() {
