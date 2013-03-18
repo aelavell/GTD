@@ -34,6 +34,14 @@ Template.topHud.loginButton = function() {
     }
 }
 
+Template.loggedIn.doModeButton = function() {
+    if( Session.equals('doModeMode', 'list') ) {
+        return "<button id=doButton type=button>Give me something to do!</button>";        
+    } else {
+        return "<button id=doButton type=button>Show Task List</button>"; 
+    }
+}
+
 Template.loggedIn.doMode = function() {
 	return Session.equals('mode', 'do');
 }
