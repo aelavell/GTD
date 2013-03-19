@@ -89,7 +89,7 @@
       <div class="tickler_ref_next_cal">
         <button id="process_tickler" class="process_button">Tickler</button>
         <button id="process_reference" class="process_button">Reference</button>
-        <button id="process_nextAction" class="process_button">Next Action</button>
+        <button id="process_next_actions" class="process_button">Next Action</button>
         <button id="process_calendar" class="process_button">Calendar</button>
       </div>
       <div class="text_in_processing">
@@ -108,7 +108,7 @@
     <div class="process">
       <ul class="scroll_list max_height">
       {{#each unprocessedTasks}}
-        <li class="unprocessed_task"><button>{{value}}</button></li>
+        <li><button class="unprocessed_task">{{value}}</button></li>
       {{/each}}
       </ul>
     </div>
@@ -118,10 +118,27 @@
 <template name="review">
   <div class="review">
     <ul>
-      <li><button id="review_projects">Projects</button></li>
-      <li><button id="review_tickler">Tickler</button></li>
-      <li><button id="review_reference">Reference</button></li>
-      <li><button id="review_calendar">Calendar</button></li>
+      {{#if mainMenu}}
+        <li><button id="review_projects">Projects</button></li>
+        <li><button id="review_tickler">Tickler</button></li>
+        <li><button id="review_reference">Reference</button></li>
+        <li><button id="review_calendar">Calendar</button></li>
+      {{/if}}
+      {{#if reviewingProjects}}
+        {{#if projectUnderReview}}
+          <ul class="scroll_list">
+            {{#each tasksForProject}}
+              <li><button class="task_button">{{value}}</button></li>
+            {{/each}}
+          </ul>
+        {{else}}
+          <ul class="scroll_list">
+            {{#each projects}}
+              <li><button class="project_button">{{value}}</button></li>
+            {{/each}}
+          </ul>
+        {{/if}}
+      {{/if}}
     </ul>
   </div>
 </template>

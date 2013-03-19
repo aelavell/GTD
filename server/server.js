@@ -1,3 +1,4 @@
-// Meteor.startup(function() {
-//     Tasks.remove({});
-// });
+Meteor.startup(function() {
+    // Tasks.remove({});
+    // Projects.remove({});
+});

@@ -14,13 +14,43 @@ Template.process.currentValue = function() {
     return Tasks.findOne({"_id": Session.get("processing")}).value;
 }
 
-Template.process.events({
-    'click ': function(event) {
-        // var x = event.currentTarget.id; 
+Template.process.events = {
+    'click .unprocessed_task': function(event) {
         Session.set("processing", this._id);
-        if (event.currentTarget.className === "project_button") {
+    },
+    'click .project_button' : function(event) {
+        var project = $(event.currentTarget).contents().filter(function(){
+            return this.nodeType === 3; 
+        }).text();
+        if (!Session.equals("selectedProject", project)) {
+            Session.get("selectedProject");
+            // need to un-highlight the selected project
+
+
+            Session.set("selectedProject", project);
             $(event.currentTarget).addClass("selected_button");
         }
+    },
+    'click #process_tickler' : function(event) {
+        Tasks.update(
+            Session.get("processing"),
+            {$set: {section: 'tickler', processed: true, project: Session.get("selectedProject")}}
+        );
+        Session.set("processing", "");
+    },
+    'click #process_reference' : function(event) {
+        Tasks.update(
+            Session.get("processing"),
+            {$set: {section: 'reference', processed: true, project: Session.get("selectedProject")}}
+        );
+        Session.set("processing", "");
+    },
+    'click #process_next_actions' : function(event) {
+        Tasks.update(
+            Session.get("processing"),
+            {$set: {section: 'next_actions', processed: true, project: Session.get("selectedProject")}}
+        );
+        Session.set("processing", "");
     },
     'keyup': function (event) {
         // insert new project
@@ -35,5 +65,4 @@ Template.process.events({
             }
         }
     }
-});
-
+};
