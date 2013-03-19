@@ -59,6 +59,14 @@
 <template name="loggedIn">
   {{#if currentUser}}
     <button id="logout">logout</button>
+    <div id="doButtonContainer">
+      {{#if doMode}}
+        {{{doModeButton}}}
+        {{#if doModeTaskMode}}
+          <button id="doSomethingElseButton" type="button">Give me something else to do!</button>
+        {{/if}}
+      {{/if}}
+    </div>
   {{/if}}
 </template>
 
@@ -74,7 +82,12 @@
       {{>review}} 
     {{/if}}
     {{#if doMode}}
-      {{>doIt}} 
+      {{#if listMode}}
+        {{>doItList}}
+      {{/if}}
+      {{#if popDoMode}}
+        {{>doItItem}}        
+      {{/if}} 
     {{/if}}
   {{/if}}
 </template>
@@ -143,7 +156,7 @@
   </div>
 </template>
 
-<template name="doIt">
+<template name="doItList">
   <ul class="scroll_list max_height">
   {{#each nextActions}}
     <li >
@@ -151,4 +164,8 @@
     </li>
   {{/each}}
   </ul>
+</template>
+
+<template name="doItItem">
+  <textarea id ="doItItemTextArea" readonly>{{doItItem}}</textarea>
 </template>

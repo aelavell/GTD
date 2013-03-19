@@ -49,13 +49,7 @@ Template.login.passwordTextBox = function() {
     return "<input type=password class=loginText autofocus placeholder=password></textarea>";
 };
 
-Template.topHud.loginButton = function() {
-    if(Session.equals("loginOrReg", "Login: ")) {
-        return "<input type=button class=registerToggle value=Register />";
-    } else {
-        return "<input type=button class=registerToggle value=Login />";       
-    }
-};
+
 
 Template.login.events = {
     'keypress': function (event) {
@@ -89,24 +83,11 @@ Template.login.events = {
     }
 };
 
-Template.topHud.events = {
-    'click .registerToggle': function (event) {        
-        if (Session.get("loginOrReg") === "Login: ") {
-            Session.set("loginOrReg", "Register: ");
-        } else {
-            Session.set("loginOrReg", "Login: ");
-        }
-        if( document.getElementById('loginText') != null) {
-            document.getElementById('loginText').focus();
-        }
-    }
-};
-
 Session.setDefault("username", "");
 Session.setDefault("password", "");
 
 Template.loggedIn.events = {
-    'click': function(event) {
+    'click #logout': function(event) {
         Meteor.logout();
     }
 };
