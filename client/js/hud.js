@@ -36,10 +36,11 @@ Template.topHud.loginButton = function() {
 
 Template.loggedIn.doModeButton = function() {
     if( Session.equals('doModeMode', 'list') ) {
-        return "<button id=doButton type=button>Give me something to do!</button>";        
-    } else {
-        return "<button id=doButton type=button>Show Task List</button>"; 
+        return "<button id=doButton type=button>PopDo</button>";        
     }
+    // } else {
+    //     return "<button id=doButton type=button>Show Task List</button>"; 
+    // }
 }
 
 Template.loggedIn.doModeTaskMode = function() {
@@ -48,6 +49,10 @@ Template.loggedIn.doModeTaskMode = function() {
 
 Template.loggedIn.doMode = function() {
 	return Session.equals('mode', 'do');
+}
+
+Template.topHud.mode = function() {
+    return Session.get('mode');
 }
 
 Template.topHud.events = {
@@ -80,7 +85,6 @@ Template.topHud.events = {
 
 Template.bottomHud.events = {
     'click' : function(event) {
-        Session.set("processing", "");   
         Session.set('mode', event.currentTarget.id);
     }
 };

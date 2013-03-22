@@ -14,7 +14,7 @@
 <template name="topHud">
   <div id="top_hud">
     {{>loggedIn}}
-    <div id="logo"><h1>A+</h1></div>
+    <div id="logo"><h1>{{mode}}</h1></div>
     {{#unless currentUser}}
       {{{loginButton}}}
     {{/unless}}
@@ -63,7 +63,7 @@
       {{#if doMode}}
         {{{doModeButton}}}
         {{#if doModeTaskMode}}
-          <button id="doSomethingElseButton" type="button">Give me something else to do!</button>
+          <button id="doSomethingElseButton" type="button">PopDo</button>
         {{/if}}
       {{/if}}
     </div>
@@ -93,29 +93,31 @@
 </template>
 
 <template name="collect">
-    <textarea id="collector" class="middle" autofocus placeholder="your idea"></textarea> 
+    <textarea id="collector" class="middle max_textbox" autofocus placeholder="your idea"></textarea> 
 </template>
 
 <template name="process">
   {{#if processingTask}}
     <div class="process">
-      <div class="tickler_ref_next_cal">
+      <div id="tickler_ref_next_cal">
         <button id="process_next_actions" class="process_button">Next Action</button>
         <button id="process_reference" class="process_button">Reference</button>
         <button id="process_tickler" class="process_button">Tickler</button>
         <button id="process_calendar" class="process_button">Calendar</button>
       </div>
-      <div class="text_in_processing">
-        <h1>{{currentValue}}</h1>
+      <div id="text_in_processing">
+        <h2>{{currentValue}}</h2>
       </div>
+      <!-- <div id="project_header"> -->
+      <!--   <h2>project:</h2> -->
+      <!-- </div> -->
+      <input type="text" id="new_project" placeholder="new project" />
       <ul class="scroll_list project_list">
+        <!-- <li><button id="new_project">new project</button></li> -->
         {{#each projects}}
           <li><button class="project_button">{{value}}</button></li>
         {{/each}}
       </ul>
-      <div>
-        <input type="text" id="new_project" placeholder="new project" />
-      </div>
     </div>
   {{else}}
     <div class="process">

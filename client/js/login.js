@@ -31,9 +31,9 @@ Template.login.loginLabel = function() {
 
 Template.login.usernameTextBox = function() {
     if(Session.equals("loginOrReg", "Login: ")) {
-        return "<input type=text class=loginText autofocus placeholder=username></textarea>";
+        return "<input type=text class=loginText autofocus placeholder=username></input>";
     } else {
-        return "<input type=text class=loginText autofocus placeholder='desired username'></textarea>";
+        return "<input type=text class=loginText autofocus placeholder='desired username'></input>";
     }
 };
 
@@ -41,12 +41,12 @@ Template.login.emailTextBox = function() {
     if(Session.equals("loginOrReg", "Login: ")) {
         return "<input type=text class=loginText autofocus placeholder='This should only appear during registration'></textarea>";
     } else {
-        return "<input type=text class=loginText autofocus placeholder='email address'></textarea>";
+        return "<input type=text class=loginText autofocus placeholder='email address'></input>";
     }
 };
 
 Template.login.passwordTextBox = function() {
-    return "<input type=password class=loginText autofocus placeholder=password></textarea>";
+    return "<input type=password class=loginText autofocus placeholder=password></input>";
 };
 
 
