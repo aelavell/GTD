@@ -6,6 +6,8 @@ Template.collect.events({
                     userId: Meteor.userId(),
                     value: event.currentTarget.value.trim(),
                     processed: false,
+                    completed: false,
+                    section: "next_actions"
                 });    
                 event.currentTarget.value = '';
                 event.currentTarget.placeholder = 'collected!';

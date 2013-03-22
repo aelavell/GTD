@@ -1,5 +1,5 @@
 Template.doItList.nextActions = function() {
-    return Tasks.find({userId: Meteor.userId(), completed: false});
+    return Tasks.find({userId: Meteor.userId(), completed: false, section: "next_actions"});
 };
 
 Template.doItItem.doItItem = function() {
