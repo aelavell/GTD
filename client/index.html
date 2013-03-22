@@ -180,6 +180,14 @@
           {{/each}}
         </ul>
       {{/if}}
+
+      {{#if reviewingCompleted}}
+        <ul class="scroll_list">
+          {{#each completedTasks}}
+            <li><button class="completed_task_button">{{value}}</button></li>
+          {{/each}}
+        </ul>
+      {{/if}}
     </ul>
   </div>
 </template>

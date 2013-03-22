@@ -40,12 +40,11 @@ Template.topHud.loginButton = function() {
 }
 
 Template.loggedIn.doModeButton = function() {
-    // if( Session.equals('doModeMode', 'list') ) {
-    //     return "<button id=doButton type=button>PopDo</button>";        
-    // }
-    // } else {
-    //     return "<button id=doButton type=button>Show Task List</button>"; 
-    // }
+    if( Session.equals('doModeMode', 'list') ) {
+        return "<button id=doButton type=button>PopDo</button>";        
+    } else {
+        return "<button id=doButton type=button>Show Task List</button>"; 
+    }
 }
 
 Template.loggedIn.doModeTaskMode = function() {
