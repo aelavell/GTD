@@ -27,8 +27,9 @@ Template.review.reviewingCalendar = function() {
     return Session.equals("reviewing", "calendar");   
 }
 
+
 Template.review.projects = function() {
-    return Projects.find({});
+    return Projects.find({userId: Meteor.userId()});
 };
 
 Template.review.tasksForProject = function() {
@@ -39,9 +40,25 @@ Template.review.projectUnderReview = function() {
     return !Session.equals("projectUnderReview", "");
 }
 
+
+Template.review.tickler = function() {
+    return Tasks.find({userId: Meteor.userId(), section: "tickler"});
+}
+
+
+Template.review.reference = function() {
+    return Tasks.find({userId: Meteor.userId(), section: "reference"});
+}
+
 Template.review.events = {
     'click #review_projects' : function(event) {
         Session.set("reviewing", "projects");   
+    },
+    'click #review_tickler' : function(event) {
+        Session.set("reviewing", "tickler");   
+    },
+    'click #review_reference' : function(event) {
+        Session.set("reviewing", "reference");   
     },
     'click .project_button' : function(event) {
         Session.set("projectUnderReview", this.value);  

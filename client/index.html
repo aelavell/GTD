@@ -137,6 +137,7 @@
         <li><button id="review_reference">Reference</button></li>
         <li><button id="review_calendar">Calendar</button></li>
       {{/if}}
+
       {{#if reviewingProjects}}
         {{#if projectUnderReview}}
           <ul class="scroll_list">
@@ -151,6 +152,22 @@
             {{/each}}
           </ul>
         {{/if}}
+      {{/if}}
+
+      {{#if reviewingTickler}}
+        <ul class="scroll_list">
+          {{#each tickler}}
+            <li><button class="task_button">{{value}}</button></li>
+          {{/each}}
+        </ul>
+      {{/if}}
+
+      {{#if reviewingReference}}
+        <ul class="scroll_list">
+          {{#each reference}}
+            <li><button class="task_button">{{value}}</button></li>
+          {{/each}}
+        </ul>
       {{/if}}
     </ul>
   </div>
