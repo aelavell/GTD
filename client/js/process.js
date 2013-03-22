@@ -48,21 +48,21 @@ Template.process.events = {
     'click #process_tickler' : function(event) {
         Tasks.update(
             Session.get("process_processing"),
-            {$set: {section: 'tickler', processed: true, project: process_selectedProject}}
+            {$set: {section: 'tickler', processed: true, completed: false, project: process_selectedProject}}
         );
         Session.set("process_processing", "");
     },
     'click #process_reference' : function(event) {
         Tasks.update(
             Session.get("process_processing"),
-            {$set: {section: 'reference', processed: true, project: process_selectedProject}}
+            {$set: {section: 'reference', processed: true, completed: false, project: process_selectedProject}}
         );
         Session.set("process_processing", "");
     },
     'click #process_next_actions' : function(event) {
         Tasks.update(
             Session.get("process_processing"),
-            {$set: {section: 'next_actions', processed: true, project: process_selectedProject}}
+            {$set: {section: 'next_actions', processed: true, completed: false, project: process_selectedProject}}
         );
         Session.set("process_processing", "");
     },
