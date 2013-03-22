@@ -1,3 +1,7 @@
+Session.setDefault("process_processing", "");
+var process_selectedProject = "";
+var process_selectedButton = "";
+
 Template.process.unprocessedTasks = function() {
     return Tasks.find({userId: Meteor.userId(), processed: false});
 };
@@ -7,51 +11,62 @@ Template.process.projects = function() {
 };
 
 Template.process.processingTask = function() {
-    return !Session.equals("processing", "");   
+    return !Session.equals("process_processing", "");
 }
 
 Template.process.currentValue = function() {
-    return Tasks.findOne({"_id": Session.get("processing")}).value;
+    return Tasks.findOne({"_id": Session.get("process_processing")}).value;
 }
+
+Deps.autorun(function() {
+    Session.get("mode");
+    Session.set("process_processing", "");
+    process_selectedProject = "";
+    process_selectedButton = "";
+});
 
 Template.process.events = {
     'click .unprocessed_task': function(event) {
-        Session.set("processing", this._id);
+        Session.set("process_processing", this._id);
     },
+
     'click .project_button' : function(event) {
         var project = $(event.currentTarget).contents().filter(function(){
             return this.nodeType === 3; 
         }).text();
-        if (!Session.equals("selectedProject", project)) {
-            Session.get("selectedProject");
-            // need to un-highlight the selected project
-
-
-            Session.set("selectedProject", project);
-            $(event.currentTarget).addClass("selected_button");
+        
+        if (!Session.equals("process_selectedProject", project)) {
+            if (process_selectedButton !== "") {
+                $(process_selectedButton).removeClass("selected_button");
+            }
+            process_selectedButton = event.currentTarget;
+            $(process_selectedButton).addClass("selected_button");
+            process_selectedProject = project;
         }
     },
+
     'click #process_tickler' : function(event) {
         Tasks.update(
-            Session.get("processing"),
-            {$set: {section: 'tickler', processed: true, project: Session.get("selectedProject")}}
+            Session.get("process_processing"),
+            {$set: {section: 'tickler', processed: true, project: process_selectedProject}}
         );
-        Session.set("processing", "");
+        Session.set("process_processing", "");
     },
     'click #process_reference' : function(event) {
         Tasks.update(
-            Session.get("processing"),
-            {$set: {section: 'reference', processed: true, project: Session.get("selectedProject")}}
+            Session.get("process_processing"),
+            {$set: {section: 'reference', processed: true, project: process_selectedProject}}
         );
-        Session.set("processing", "");
+        Session.set("process_processing", "");
     },
     'click #process_next_actions' : function(event) {
         Tasks.update(
-            Session.get("processing"),
-            {$set: {section: 'next_actions', processed: true, project: Session.get("selectedProject")}}
+            Session.get("process_processing"),
+            {$set: {section: 'next_actions', processed: true, project: process_selectedProject}}
         );
-        Session.set("processing", "");
+        Session.set("process_processing", "");
     },
+
     'keyup': function (event) {
         // insert new project
         if (event.keyCode == 13) {

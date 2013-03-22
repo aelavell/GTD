@@ -1,6 +1,12 @@
 Session.setDefault("reviewing", "");
 Session.setDefault("projectUnderReview", "");
 
+Deps.autorun(function() {
+    Session.get("mode");
+    Session.set("reviewing", "");
+    Session.set("projectUnderReview", "");
+});
+
 Template.review.mainMenu = function() {
     return Session.equals("reviewing", "");   
 }
