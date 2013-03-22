@@ -14,10 +14,14 @@
 <template name="topHud">
   <div id="top_hud">
     {{>loggedIn}}
-    <div id="logo"><h1>{{mode}}</h1></div>
+    <div id="logo"><h1 id="top_title">{{mode}}</h1></div>
     {{#unless currentUser}}
       {{{loginButton}}}
-    {{/unless}}
+    {{/unless}} 
+    {{#if taskSelected}} 
+      <button class="done_button">Done</button> 
+    {{/if}}
+    
   </div>
 </template>
 
@@ -93,7 +97,7 @@
 </template>
 
 <template name="collect">
-    <textarea id="collector" class="middle max_textbox" autofocus placeholder="your idea"></textarea> 
+    <textarea id="collector" class="middle max_textbox" autofocus placeholder="new task"></textarea> 
 </template>
 
 <template name="process">
@@ -138,16 +142,21 @@
         <li><button id="review_tickler">Tickler</button></li>
         <li><button id="review_reference">Reference</button></li>
         <li><button id="review_calendar">Calendar</button></li>
+        <li><button id="review_completed">Completed Tasks</button></li>
       {{/if}}
 
       {{#if reviewingProjects}}
         {{#if projectUnderReview}}
           <ul class="scroll_list">
             {{#each tasksForProject}}
-              <li><button class="task_button">{{value}}</button></li>
+              <li><button class="do_it_button">{{value}}</button></li>
+            {{/each}}
+            {{#each completedTasksForProject}}
+              <li><button class="completed_task_button">{{value}}</button></li>
             {{/each}}
           </ul>
         {{else}}
+          <input type="text" id="new_project" placeholder="new project" />
           <ul class="scroll_list">
             {{#each projects}}
               <li><button class="project_button">{{value}}</button></li>

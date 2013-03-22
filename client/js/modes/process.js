@@ -2,12 +2,19 @@ Session.setDefault("process_processing", "");
 var process_selectedProject = "";
 var process_selectedButton = "";
 
+Deps.autorun(function() {
+    Session.get("mode");
+    Session.set("process_processing", "");
+    process_selectedProject = "";
+    process_selectedButton = "";
+});
+
 Template.process.unprocessedTasks = function() {
     return Tasks.find({userId: Meteor.userId(), processed: false});
 };
 
 Template.process.projects = function() {
-    return Projects.find({userId: Meteor.userId()});
+    return Projects.find({userId: Meteor.userId()}, {sort: ["value", "asc"]});
 };
 
 Template.process.processingTask = function() {
@@ -17,13 +24,6 @@ Template.process.processingTask = function() {
 Template.process.currentValue = function() {
     return Tasks.findOne({"_id": Session.get("process_processing")}).value;
 }
-
-Deps.autorun(function() {
-    Session.get("mode");
-    Session.set("process_processing", "");
-    process_selectedProject = "";
-    process_selectedButton = "";
-});
 
 Template.process.events = {
     'click .unprocessed_task': function(event) {
@@ -35,14 +35,12 @@ Template.process.events = {
             return this.nodeType === 3; 
         }).text();
         
-        if (!Session.equals("process_selectedProject", project)) {
-            if (process_selectedButton !== "") {
-                $(process_selectedButton).removeClass("selected_button");
-            }
-            process_selectedButton = event.currentTarget;
-            $(process_selectedButton).addClass("selected_button");
-            process_selectedProject = project;
+        if (process_selectedButton !== "") {
+            $(process_selectedButton).removeClass("selected_button");
         }
+        process_selectedButton = event.currentTarget;
+        $(process_selectedButton).addClass("selected_button");
+        process_selectedProject = project;
     },
 
     'click #process_tickler' : function(event) {

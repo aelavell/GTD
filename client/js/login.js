@@ -88,6 +88,11 @@ Session.setDefault("password", "");
 
 Template.loggedIn.events = {
     'click #logout': function(event) {
-        Meteor.logout();
+        Meteor.logout(function(event) {
+            // hax to make everything get set to defaults
+            Session.set("mode", "");    
+            Session.set("mode", "collect");    
+        });
+
     }
 };

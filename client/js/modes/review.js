@@ -1,8 +1,10 @@
 Session.setDefault("reviewing", "");
 Session.setDefault("projectUnderReview", "");
+var review_selectedButton = "";
 
 Deps.autorun(function() {
     Session.get("mode");
+    review_selectedButton = "";
     Session.set("reviewing", "");
     Session.set("projectUnderReview", "");
 });
@@ -33,7 +35,11 @@ Template.review.projects = function() {
 };
 
 Template.review.tasksForProject = function() {
-    return Tasks.find({project: Session.get("projectUnderReview")});
+    return Tasks.find({project: Session.get("projectUnderReview"), completed: false});
+}
+
+Template.review.completedTasksForProject = function() {
+    return Tasks.find({project: Session.get("projectUnderReview"), completed: true});
 }
 
 Template.review.projectUnderReview = function() {
@@ -62,5 +68,26 @@ Template.review.events = {
     },
     'click .project_button' : function(event) {
         Session.set("projectUnderReview", this.value);  
+    },
+    'keyup': function (event) {
+        // insert new project
+        if (event.keyCode == 13) {
+            if (event.currentTarget.value.trim() !== '') {
+                Projects.insert({
+                    userId: Meteor.userId(),
+                    value: event.currentTarget.value.trim(),
+                });    
+                event.currentTarget.value = '';
+                Meteor.flush();
+            }
+        }
+    },
+    'click .do_it_button' : function(event) {
+        if (review_selectedButton !== "") {
+            $(review_selectedButton).removeClass("selected_button");
+        }
+        review_selectedButton = event.currentTarget;
+        $(review_selectedButton).addClass("selected_button");
+        Session.set("do_selectedTask", this._id);
     }
 };

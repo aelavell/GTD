@@ -7,7 +7,8 @@ Template.collect.events({
                     value: event.currentTarget.value.trim(),
                     processed: false,
                     completed: false,
-                    section: "next_actions"
+                    section: "next_actions",
+                    // timestamp: 
                 });    
                 event.currentTarget.value = '';
                 event.currentTarget.placeholder = 'collected!';
