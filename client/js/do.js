@@ -10,7 +10,7 @@ Template.doItList.events = {
     "click .do_it_button" : function(event) {
         Tasks.update(
             this._id,
-            {$set: {completed: true}}
+            {$set: {completed: true, processed: true}}
         );
     }
 };
