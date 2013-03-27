@@ -5,8 +5,11 @@
 ***********************************/
 setInterval(getMail, 300000);
 
+//var dbTask = new Meteor.Collection("tasks");
 
-function getMail() {
+//getMail(dbTask);
+
+function getMail(db) {
   
   //folder with new email
   var dir = "/home/brad/Maildir/new/";
@@ -38,22 +41,25 @@ function getMail() {
           //else if "From:" is in the line, cut it out and put the remainder in from.
         }else if(line.search("From:") > -1 && countFrom === 0) {
           var newFrom = line.substring(6, line.length).split(" ");
-	  from = newFrom[0];
+       	  from = newFrom[0];
           countFrom++;
         }
     });
-    //get DB records of from and insert subject as task
-    insTask(from, subject);
 
+    //get DB records of from and insert subject as task
+    insTask(from, subject, db);
+       
+        
     //delete file
-    fs.unlinkSync(path);
+    //fs.unlinkSync(path);
   }
 }
 
 //Inserts a task in the db based on userEmail
-function insTask(userEmail, task) {
-
-  Fiber(function() {
+function insTask(userEmail, task, db) {
+  //Collection.Tasks.insert({email: userEmail, tasks: task});
+  db.insert({email: userEmail, tasks: task});
+  /*Fiber(function() {
     Meteor.users.insert(Fiber(function() {Meteor.users.find(userEmail)}).run(), {tasks: task});
-  }).run();
+  }).run();*/
 }
