@@ -2,14 +2,14 @@
 //Will have to change the dir variable to the directory path where the mail files get put
 /***UNCOMMENT THIS PART***********
 //Run getMail() every 5min
-setInterval(getMail, 300000);
 ***********************************/
+setInterval(getMail, 300000);
 
 
 function getMail() {
   
   //folder with new email
-  var dir = "/home/latimiro/mailbox/new/";
+  var dir = "/home/brad/Maildir/new/";
   
   var require = __meteor_bootstrap__.require;
   var fs = require('fs');

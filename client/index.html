@@ -47,15 +47,21 @@
 </template>
 
 <template name="login">
-  {{#unless currentUser}}
-    {{#if usernameAcquired}}
-      {{#if emailRequired}}
-        {{{emailTextBox}}}
-      {{else}}
-        {{{passwordTextBox}}}
-      {{/if}}
-    {{else}}
+  {{#unless currentUser}}    
+    {{#if usernameMode}}
       {{{usernameTextBox}}}
+    {{/if}}
+    {{#if emailMode}}
+      {{{emailTextBox}}}
+    {{/if}}
+    {{#if passwordMode}}
+      {{{passwordTextBox}}}
+    {{/if}}
+    {{#if loginFailed}}
+      <textarea id="loginFailed" class="loginText" readonly>Username or password incorrect</textarea> 
+    {{/if}}
+    {{#if registerFailed}}
+      <textarea id="registerFailed" class="loginText" readonly>Username has already been taken</textarea>
     {{/if}}
   {{/unless}}
 </template>
