@@ -32,7 +32,7 @@ Template.modeManager.popDoMode = function() {
 }
 
 Template.topHud.loginButton = function() {
-    if(Session.equals("loginOrReg", "Login: ")) {
+    if(Session.equals("loginOrReg", "login")) {
         return "<input type=button class=registerToggle value=Register />";
     } else {
         return "<input type=button class=registerToggle value=Login />";       
@@ -60,11 +60,12 @@ Template.topHud.mode = function() {
 }
 
 Template.topHud.events = {
-    'click .registerToggle': function (event) {        
-        if (Session.get("loginOrReg") === "Login: ") {
-            Session.set("loginOrReg", "Register: ");
+    'click .registerToggle': function (event) {
+        Session.set("loginMode", "username");        
+        if (Session.get("loginOrReg") === "login") {
+            Session.set("loginOrReg", "register");
         } else {
-            Session.set("loginOrReg", "Login: ");
+            Session.set("loginOrReg", "login");
         }
         if( document.getElementById('loginText') != null) {
             document.getElementById('loginText').focus();

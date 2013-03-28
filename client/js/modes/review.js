@@ -2,6 +2,8 @@ Session.setDefault("reviewing", "");
 Session.setDefault("projectUnderReview", "");
 var review_selectedButton = "";
 
+
+
 Deps.autorun(function() {
     Session.get("mode");
     review_selectedButton = "";
@@ -63,6 +65,13 @@ Template.review.reference = function() {
     return Tasks.find({userId: Meteor.userId(), section: "reference"});
 }
 
+Template.calendarTemplate.rendered = function() {
+    if(!this._rendered) {
+      this._rendered = true;
+      $(this.find("#calendar")).weekCalendar();
+    }
+}
+
 Template.review.events = {
     'click #review_projects' : function(event) {
         Session.set("reviewing", "projects");   
@@ -72,6 +81,9 @@ Template.review.events = {
     },
     'click #review_reference' : function(event) {
         Session.set("reviewing", "reference");   
+    },
+    'click #review_calendar' : function(event) {
+        Session.set("reviewing", "calendar");
     },
     'click #review_completed' : function(event) {
         Session.set("reviewing", "completed");  
