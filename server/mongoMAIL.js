@@ -7,12 +7,13 @@ setInterval(getMail, 300000);
 
 //var dbTask = new Meteor.Collection("tasks");
 
-//getMail(dbTask);
+getMail();
+console.log("test");
 
-function getMail(db) {
+function getMail() {
   
   //folder with new email
-  var dir = "/home/latimiro/mailbox/new/";
+  var dir = "/home/brad/Maildir/new/";
   
   var require = __meteor_bootstrap__.require;
   var fs = require('fs');
@@ -26,7 +27,7 @@ function getMail(db) {
     var from = "";
     var subject = "";
     var path = dir + fileList[i];
-	
+  
     //Stream the current file, put it into a string, split the string, go through the content line by line.
     fs.readFileSync(path)
       .toString().split("\n")
@@ -41,24 +42,35 @@ function getMail(db) {
           //else if "From:" is in the line, cut it out and put the remainder in from.
         }else if(line.search("From:") > -1 && countFrom === 0) {
           var newFrom = line.substring(6, line.length).split(" ");
-       	  from = newFrom[0];
+          from = newFrom[0];
           countFrom++;
         }
     });
 
     //get DB records of from and insert subject as task
-    insTask(from, subject, db);
+    var Tasks = new Meteor.Collection("tasks");
+    insTask(from, subject, Tasks);
        
         
     //delete file
-    //fs.unlinkSync(path);
+    fs.unlinkSync(path);
   }
 }
 
 //Inserts a task in the db based on userEmail
-function insTask(userEmail, task, db) {
+function insTask(userEmail, task, collection) {
   //Collection.Tasks.insert({email: userEmail, tasks: task});
-  db.insert({email: userEmail, tasks: task});
+  //Tasks.insert({email: userEmail, tasks: task});
+  var user = Meteor.users.findOne({'emails.address': {$regex:userEmail,$options:'i'}}, {fields: {'_id': 1}});
+  //var user = Meteor.users.findOne({'emails.address': 'me@example.com'}, {fields: {'profile.name': 1}});
+  collection.insert({
+                    userId: user,
+                    value: task,
+                    processed: false,
+                    completed: false,
+                    section: "next_actions",
+                    // timestamp: 
+                });
   /*Fiber(function() {
     Meteor.users.insert(Fiber(function() {Meteor.users.find(userEmail)}).run(), {tasks: task});
   }).run();*/
