@@ -187,6 +187,10 @@
         </ul>
       {{/if}}
 
+      {{#if reviewingCalendar}}
+        {{>calendarTemplate}}
+      {{/if}}
+
       {{#if reviewingCompleted}}
         <ul class="scroll_list">
           {{#each completedTasks}}
@@ -196,6 +200,10 @@
       {{/if}}
     </ul>
   </div>
+</template>
+
+<template name="calendarTemplate">
+  <div class="calendar" id="calendar"></div>
 </template>
 
 <template name="doItList">
