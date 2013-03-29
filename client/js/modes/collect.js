@@ -7,6 +7,8 @@ Template.collect.events({
                     value: event.currentTarget.value.trim(),
                     processed: false,
                     completed: false,
+                    startDate: 0,
+                    endDate: 0,
                     section: "next_actions",
                     // timestamp: 
                 });    
