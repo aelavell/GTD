@@ -1,3 +1,3 @@
-var Tasks = new Meteor.Collection("tasks");
-var Projects = new Meteor.Collection("projects");
+Tasks = new Meteor.Collection("tasks");
+Projects = new Meteor.Collection("projects");
 

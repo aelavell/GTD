@@ -55,7 +55,6 @@ Template.review.projectUnderReview = function() {
     return !Session.equals("projectUnderReview", "");
 }
 
-
 Template.review.tickler = function() {
     return Tasks.find({userId: Meteor.userId(), section: "tickler"});
 }
@@ -66,10 +65,40 @@ Template.review.reference = function() {
 }
 
 Template.calendarTemplate.rendered = function() {
-    if(!this._rendered) {
-      this._rendered = true;
-      $(this.find("#calendar")).weekCalendar();
-    }
+    var taskList = Tasks.find({userId: Meteor.userId(), processed: true, section: "calendar", completed: false});
+    var calTasks = [];
+    var count = 0;
+    taskList.forEach(function(item) {
+        var temp = {"id": count,
+                    "start": item.startDate,
+                    "end": item.startDate,
+                    "title": item.value};
+        if( !( typeof temp.start == 'undefined' || typeof temp.end == 'undefined'
+            || temp.start === 0 || temp.end === 0 ) ) {
+            calTasks.push(temp);
+            count++;
+        }
+    });
+    var eventData = { 
+        events : calTasks };
+    $(this.find("#calendar")).weekCalendar( { timeslotsPerHour: 2, 
+            timeslotHeigh: 120, 
+            hourLine: true, 
+            data: eventData,
+            readonly: true,
+            showHeader: false,
+            height: function($calendar) {
+                return $(window).height() - $('h1').outerHeight(true);
+            },
+            eventRender : function(calEvent, $event) {
+                if (calEvent.end.getTime() < new Date().getTime()) {
+                    $event.css('backgroundColor', '#aaa');
+                    $event.find('.time').css({'backgroundColor': '#999', 'border':'1px solid #888'});
+                }
+            },
+            noEvents: function() {
+            } 
+        } );    
 }
 
 Template.review.events = {
@@ -90,6 +119,15 @@ Template.review.events = {
     },
     'click .project_button' : function(event) {
         Session.set("projectUnderReview", this.value);  
+    },
+    'click #lastWeek' : function(event) {
+        $("#calendar").weekCalendar("prevWeek");
+    },
+    'click #thisWeek' : function(event) {
+        $("#calendar").weekCalendar("today");
+    },
+    'click #nextWeek' : function(event) {
+        $("#calendar").weekCalendar("nextWeek");
     },
     'keyup': function (event) {
         // insert new project

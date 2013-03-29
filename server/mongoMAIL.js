@@ -7,10 +7,11 @@ setInterval(getMail, 300000);
 
 //var dbTask = new Meteor.Collection("tasks");
 
-getMail();
+//var Tasks = new Meteor.Collection("tasks");
+//getMail(Tasks);
 console.log("test");
 
-function getMail() {
+function getMail(Tasks) {
   
   //folder with new email
   var dir = "/home/brad/Maildir/new/";
@@ -48,7 +49,6 @@ function getMail() {
     });
 
     //get DB records of from and insert subject as task
-    var Tasks = new Meteor.Collection("tasks");
     insTask(from, subject, Tasks);
        
         
