@@ -8,11 +8,11 @@ Deps.autorun(function() {
 });
 
 Template.doItList.nextActions = function() {
-    return Tasks.find({userId: Meteor.userId(), completed: false, section: "next_actions"});
+    return Tasks.find({userId: Meteor.userId(), completed : false, processed : true});
 };
 
 Template.doItItem.doItItem = function() {
-	return Tasks.find({userId: Meteor.userId()}, {skip: Session.get("doSelectedTaskNum"), limit: 1}).fetch()[0].value;
+	return Tasks.find({userId: Meteor.userId(), completed : false, processed : true}, {skip: Session.get("doSelectedTaskNum"), limit: 1}).fetch()[0].value;
 };
 
 Template.doItList.events = {

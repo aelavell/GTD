@@ -74,7 +74,7 @@ Template.topHud.events = {
     'click #doButton': function (event) {   
     	if( Session.equals('doModeMode', 'list') ){
     		Session.set('doModeMode', 'task');
-        	var taskCount=Tasks.find({userId: Meteor.userId(), completed: false}).count(); 
+        	var taskCount=Tasks.find({userId: Meteor.userId(), completed : false, processed : true}).count(); 
         	var randomNumber=Math.floor(Math.random()*taskCount);
         	Session.set("doSelectedTaskNum", randomNumber);
         } else {
