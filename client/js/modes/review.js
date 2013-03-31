@@ -98,7 +98,10 @@ Template.calendarTemplate.rendered = function() {
             },
             noEvents: function() {
             } 
-        } );    
+        } );
+    // var calHeight = $('#calendar').outerHeight(); 
+    // calHeight = calHeight - $('#bottom_hud').outerHeight();
+    // $('#calendar').height(calHeight);
 }
 
 Template.review.events = {

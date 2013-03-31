@@ -564,8 +564,8 @@
         if (options && $.isFunction(options.height)) {
           var calendarHeight = options.height(this.element);
           var headerHeight = this.element.find('.wc-header').outerHeight();
-          var navHeight = this.element.find('.wc-toolbar').outerHeight();
-          var scrollContainerHeight = Math.max(calendarHeight - navHeight - headerHeight, options.minBodyHeight);
+          var navHeight = $('#calendarHeader').outerHeight();
+          var scrollContainerHeight = Math.max(calendarHeight - navHeight - headerHeight - $('#bottom_hud').outerHeight(), options.minBodyHeight);
           var timeslotHeight = this.element.find('.wc-time-slots').outerHeight();
           this.element.find('.wc-scrollable-grid').height(scrollContainerHeight);
           if (timeslotHeight <= scrollContainerHeight) {
