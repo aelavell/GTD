@@ -1,5 +1,4 @@
 if(Meteor.isClient) {
     var Tasks = new Meteor.Collection("tasks");
-    var Projects = new Meteor.Collection("projects");
 }
-
+var Projects = new Meteor.Collection("projects");

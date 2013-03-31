@@ -16,7 +16,7 @@ Template.collect.events({
                 event.currentTarget.placeholder = 'collected!';
                 Meteor.flush();
                 Meteor.setTimeout(function() {
-                    $("#collector").attr('placeholder', 'your idea'); 
+                    $("#collector").attr('placeholder', 'new task'); 
                 }, 1500);
             }
             else {
