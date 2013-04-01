@@ -5,7 +5,7 @@
  **********************************/
 
 var dbTasks = new Meteor.Collection("tasks");
-
+getMail(dbTasks);
 Meteor.setInterval(function() {
     getMail(dbTasks);
 }, 300000);
@@ -13,7 +13,7 @@ Meteor.setInterval(function() {
 function getMail(Tasks) {
 
     //folder with new email
-    var dir = "/home/latimiro/mailbox/";
+    var dir = "/home/brad/Maildir/new/";
 
     var require = __meteor_bootstrap__.require;
     var fs = require('fs');
