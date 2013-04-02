@@ -56,7 +56,11 @@ Template.loggedIn.doMode = function() {
 }
 
 Template.topHud.mode = function() {
-    return Session.get('mode');
+    if( Meteor.user() === null ) {
+        return 'A+';
+    } else {
+        return Session.get('mode');
+    }
 }
 
 Template.topHud.events = {
